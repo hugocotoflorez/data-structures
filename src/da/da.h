@@ -73,7 +73,7 @@
         })
 
 /* Get size */
-#define da_getsize(da) (da->size)
+#define da_getsize(da) ((da).size)
 
 /* can be used as:
  * for_da_each(i, DA), where
