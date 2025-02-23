@@ -68,7 +68,7 @@ da_destroy(&str);
 | All DA functions | Thread safety | none |
 
 ## STANDARDS
-C99 (GNU C)
+C99, gnu C99
 
 ## Author
 
