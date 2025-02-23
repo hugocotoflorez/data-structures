@@ -12,6 +12,8 @@ main()
         char_da str2;
         char_da str3;
 
+        assert(0);
+
         printf("INIT ... ");
         da_init(&str, 0);
         da_init(&str2);
