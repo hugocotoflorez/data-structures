@@ -45,7 +45,7 @@ size = da_getsize(&str);
 Pseudo for each:
 ``` c
 for_da_each(i, str){
-    printf("%c\n", i);
+    printf("%c\n", *i);
 }
 ```
 
