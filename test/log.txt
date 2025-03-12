@@ -14,3 +14,43 @@ GETSIZE ... done!
 FOR_DA_EACH ... done!
 DESTROY ... done!
 da_test: da_test.c:15: main: Assertion `0' failed.
+INIT ... done!
+APPEND - INSERT ... done!
+GETSIZE ... done!
+FOR_DA_EACH ... done!
+DESTROY ... done!
+INIT ... done!
+APPEND - INSERT ... done!
+GETSIZE ... done!
+FOR_DA_EACH ... done!
+DESTROY ... done!
+INIT ... done!
+APPEND - INSERT ... done!
+GETSIZE ... done!
+FOR_DA_EACH ... done!
+DESTROY ... done!
+INIT ... done!
+APPEND - INSERT ... done!
+GETSIZE ... done!
+FOR_DA_EACH ... done!
+DESTROY ... done!
+INIT ... done!
+APPEND - INSERT ... done!
+GETSIZE ... done!
+FOR_DA_EACH ... done!
+DESTROY ... done!
+INIT ... done!
+APPEND - INSERT ... done!
+GETSIZE ... done!
+FOR_DA_EACH ... done!
+DESTROY ... done!
+INIT ... done!
+APPEND - INSERT ... done!
+GETSIZE ... done!
+FOR_DA_EACH ... done!
+DESTROY ... done!
+INIT ... done!
+APPEND - INSERT ... done!
+GETSIZE ... done!
+FOR_DA_EACH ... done!
+DESTROY ... done!

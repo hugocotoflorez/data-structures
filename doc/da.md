@@ -53,6 +53,11 @@ Destroy the DA:
 ``` c
 da_destroy(&str);
 ```
+
+## CPP COMPATIBILITY
+For using with CPP it is needed to `#define DA_CPP_COMPATIBLE`.
+Defining this macro makes DA gnu dependent.
+
 ## RETURN VALUE
 `DA(some_type)`: DA base struct of data type some_type.
 `da_init()`: Initialized DA.
@@ -68,7 +73,7 @@ da_destroy(&str);
 | All DA functions | Thread safety | none |
 
 ## STANDARDS
-C99, gnu C99
+C99, gnu C++98
 
 ## Author
 

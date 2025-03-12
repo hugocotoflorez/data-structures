@@ -1,6 +1,7 @@
 #include <assert.h>
 #include <stdio.h>
 
+#define DA_CPP_COMPATIBLE
 #include "../src/da/da.h"
 
 typedef DA(char) char_da;

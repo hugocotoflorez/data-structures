@@ -13,9 +13,20 @@
 
 #include <stdlib.h> // alloc
 
+#ifdef DA_CPP_COMPATIBLE
+#define DA_REALLOC(dest, size) (typeof(dest)) realloc((dest), (size))
+#else
+#define DA_REALLOC(dest, size) realloc((dest), (size));
+#endif
+
+#ifdef DA_CPP_COMPATIBLE
+#define AUTO_TYPE auto
+#else
+#define AUTO_TYPE __auto_type
+#endif
+
 #define DA(type)              \
-        struct                \
-        {                     \
+        struct {              \
                 int capacity; \
                 int size;     \
                 type *data;   \
@@ -24,30 +35,31 @@
 #include <assert.h>
 /* Initialize DA_PTR (that is a pointer to a DA). Initial size (int) can be
  * passed as second argument, default is 4. */
-#define da_init(da_ptr, ...)                                                            \
-        ({                                                                              \
-                (da_ptr)->capacity = 0##__VA_ARGS__ ? __VA_ARGS__ : 4;                  \
-                (da_ptr)->size = 0;                                                     \
-                (da_ptr)->data = malloc(sizeof *((da_ptr)->data) * (da_ptr)->capacity); \
-                assert(da_ptr);                                                         \
-                da_ptr;                                                                 \
+#define da_init(da_ptr, ...)                                                               \
+        ({                                                                                 \
+                (da_ptr)->capacity = 0##__VA_ARGS__ ? __VA_ARGS__ : 4;                     \
+                (da_ptr)->size = 0;                                                        \
+                (da_ptr)->data = NULL;                                                     \
+                (da_ptr)->data =                                                           \
+                DA_REALLOC((da_ptr)->data, sizeof *((da_ptr)->data) * (da_ptr)->capacity); \
+                assert(da_ptr);                                                            \
+                da_ptr;                                                                    \
         })
 
 #include <assert.h>
 // add E to DA_PTR that is a pointer to a DA of the same type as E
-#define da_append(da_ptr, e)                                                     \
-        ({                                                                       \
-                if ((da_ptr)->size >= (da_ptr)->capacity)                        \
-                {                                                                \
-                        (da_ptr)->capacity += 3;                                 \
-                        (da_ptr)->data =                                         \
-                        realloc((da_ptr)->data,                                  \
-                                sizeof(*((da_ptr)->data)) * (da_ptr)->capacity); \
-                        assert(da_ptr);                                          \
-                }                                                                \
-                assert((da_ptr)->size < (da_ptr)->capacity);                     \
-                (da_ptr)->data[(da_ptr)->size++] = (e);                          \
-                (da_ptr)->size - 1;                                              \
+#define da_append(da_ptr, e)                                                        \
+        ({                                                                          \
+                if ((da_ptr)->size >= (da_ptr)->capacity) {                         \
+                        (da_ptr)->capacity += 3;                                    \
+                        (da_ptr)->data =                                            \
+                        DA_REALLOC((da_ptr)->data,                                  \
+                                   sizeof(*((da_ptr)->data)) * (da_ptr)->capacity); \
+                        assert(da_ptr);                                             \
+                }                                                                   \
+                assert((da_ptr)->size < (da_ptr)->capacity);                        \
+                (da_ptr)->data[(da_ptr)->size++] = (e);                             \
+                (da_ptr)->size - 1;                                                 \
         })
 
 /* Destroy DA pointed by DA_PTR. DA can be initialized again but previous values
@@ -80,7 +92,7 @@
  * - i: varuable where a pointer to an element from DA is going to be stored
  * - DA: is a valid DA */
 #define for_da_each(_i_, da) \
-        for (__auto_type _i_ = (da).data; (int) (_i_ - (da).data) < (da).size; ++_i_)
+        for (AUTO_TYPE _i_ = (da).data; (int) (_i_ - (da).data) < (da).size; ++_i_)
 
 
 #endif
